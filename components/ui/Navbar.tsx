@@ -7,7 +7,7 @@ export const Navbar = () => {
   const router = useRouter();
 
   const onClick = (route: String) => {
-    router.push(route);
+    router.push(`${route}`);
   };
   return (
     <Box sx={{ flexGrow: 1 }}>
