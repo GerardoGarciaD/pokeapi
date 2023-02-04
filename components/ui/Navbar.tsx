@@ -1,8 +1,14 @@
 import { Box, AppBar, Toolbar, Button } from '@mui/material';
 import React from 'react';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 
 export const Navbar = () => {
+  const router = useRouter();
+
+  const onClick = (route: String) => {
+    router.push(route);
+  };
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -15,6 +21,8 @@ export const Navbar = () => {
         >
           <Box>
             <Image
+              onClick={() => onClick('/')}
+              style={{ cursor: 'pointer' }}
               src="/PokeApi.svg"
               width={100}
               height={40}
@@ -27,7 +35,9 @@ export const Navbar = () => {
             <Button color="primary">Color</Button>
             <Button color="primary">Tamaño</Button>
             <Button color="primary">Region</Button>
-            <Button color="primary">Favoritos</Button>
+            <Button onClick={() => onClick('/favorites')} color="primary">
+              Favoritos
+            </Button>
           </Box>
         </Toolbar>
       </AppBar>
