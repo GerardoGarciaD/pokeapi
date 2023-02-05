@@ -35,12 +35,6 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
               name
             }
           }
-          pokemon_v2_pokemonstats {
-            base_stat
-            pokemon_v2_stat {
-              name
-            }
-          }
         }
       }
     `,
