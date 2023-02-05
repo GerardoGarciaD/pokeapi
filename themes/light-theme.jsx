@@ -29,27 +29,13 @@ export const lightTheme = createTheme({
       styleOverrides: {
         root: {
           backgroundColor: 'rgba(255, 255, 255, 0.34)',
-          height: 60,
+          height: 80,
           borderRadius: 5,
           maxWidth: '95%',
           margin: '0 auto',
           marginTop: 20,
-        },
-      },
-    },
-    MuiTypography: {
-      styleOverrides: {
-        h1: {
-          fontSize: 30,
-          fontWeight: 600,
-        },
-        h2: {
-          fontSize: 20,
-          fontWeight: 400,
-        },
-        subtitle1: {
-          fontSize: 18,
-          fontWeight: 600,
+          display: 'flex',
+          justifyContent: 'center',
         },
       },
     },
@@ -84,6 +70,34 @@ export const lightTheme = createTheme({
           borderRadius: '10px',
         },
       },
+    },
+  },
+  typography: {
+    fontFamily: ['Press Start 2P', 'sans-serif'].join(','),
+    fontSize: 12,
+    h1: {
+      fontFamily: ['Press Start 2P', 'sans-serif'].join(','),
+      fontSize: 40,
+    },
+    h2: {
+      fontFamily: ['Press Start 2P', 'sans-serif'].join(','),
+      fontSize: 32,
+    },
+    h3: {
+      fontFamily: ['Press Start 2P', 'sans-serif'].join(','),
+      fontSize: 24,
+    },
+    h4: {
+      fontFamily: ['Press Start 2P', 'sans-serif'].join(','),
+      fontSize: 20,
+    },
+    h5: {
+      fontFamily: ['Press Start 2P', 'sans-serif'].join(','),
+      fontSize: 16,
+    },
+    h6: {
+      fontFamily: ['Press Start 2P', 'sans-serif'].join(','),
+      fontSize: 14,
     },
   },
 });
