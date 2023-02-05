@@ -1,4 +1,4 @@
-import { Box, AppBar, Toolbar, Button } from '@mui/material';
+import { Box, AppBar, Toolbar, Button, Typography } from '@mui/material';
 import React from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
@@ -31,10 +31,6 @@ export const Navbar = () => {
             ></Image>
           </Box>
           <Box>
-            <Button color="primary">Typo</Button>
-            <Button color="primary">Color</Button>
-            <Button color="primary">Tamaño</Button>
-            <Button color="primary">Region</Button>
             <Button onClick={() => onClick('/favorites')} color="primary">
               Favoritos
             </Button>
