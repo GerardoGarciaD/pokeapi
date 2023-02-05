@@ -1,0 +1,43 @@
+.card {
+  width: 100%;
+  position: relative;
+}
+
+.hp {
+  background-color: #ffffff;
+  border-radius: 30px;
+  width: 70px;
+  text-align: center;
+  padding: 3px;
+}
+
+.pokemonImg {
+  display: block;
+  margin: 20px auto;
+  position: relative;
+  max-width: 200;
+  min-width: 100;
+}
+
+.type {
+  display: flex;
+  justify-content: space-around;
+  margin: 20px 0 20px 0;
+}
+
+.stats {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-align: center;
+  padding: 0 10px;
+}
+
+.color-stats {
+  color: #404060;
+  margin-top: 0;
+}
+
+.capitalize {
+  text-transform: capitalize;
+}
