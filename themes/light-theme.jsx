@@ -3,6 +3,9 @@ import { createTheme } from '@mui/material/styles';
 export const lightTheme = createTheme({
   palette: {
     mode: 'light',
+    background: {
+      default: '#eff3ff',
+    },
     primary: {
       main: '#1E1E1E',
     },
@@ -22,7 +25,6 @@ export const lightTheme = createTheme({
     MuiAppBar: {
       defaultProps: {
         elevation: 0,
-        position: 'fixed',
       },
       styleOverrides: {
         root: {
