@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
 import {
   Grid,
   Card,
@@ -23,7 +23,7 @@ export const PokemonCard: FC<Props> = ({ pokemon }) => {
   const pokemonType = pokemon_v2_pokemontypes[0].pokemon_v2_type.name;
 
   const onClick = () => {
-    router.push(`/name/${name}`);
+    router.push(`/pokemon/${name}`);
   };
 
   return (
