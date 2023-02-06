@@ -2,7 +2,7 @@
   width: 1000px;
   height: 800px;
   margin: auto;
-  margin-top: 100px;
+  margin-top: 4rem;
   background-color: #dd0b2d;
   border: #000000 10px solid;
   z-index: 2;
@@ -23,7 +23,27 @@
   height: 90%;
   display: block;
   margin: 20px auto;
+  animation: blinkingImage 1s ease-in 1s 3 alternate-reverse;
 }
+
+@keyframes blinkingImage {
+  0% {
+    opacity: 1;
+  }
+  25% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 .divider {
   background-color: #88061c;
   grid-column-start: 3;
