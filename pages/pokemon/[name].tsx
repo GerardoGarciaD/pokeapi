@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { MainLayout } from '../../components/layouts';
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import { localFavorites } from '../../utils';
-import client from '../../apollo-client';
+import client from '../../config/apollo-client';
 import {
   PokemonPokedex,
   PokemonPokedexInfo,

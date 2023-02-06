@@ -3,7 +3,7 @@ import '../styles/globals.css';
 import { ThemeProvider } from '@emotion/react';
 import { lightTheme } from '../themes/';
 import { CssBaseline } from '@mui/material';
-import client from '../apollo-client';
+import client from '../config/apollo-client';
 import { ApolloProvider } from '@apollo/client';
 
 function MyApp({ Component, pageProps }: AppProps) {

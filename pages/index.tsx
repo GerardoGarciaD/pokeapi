@@ -2,7 +2,7 @@ import type { GetStaticProps, NextPage } from 'next';
 import { MainLayout } from '../components/layouts';
 import Grid from '@mui/material/Grid';
 import { PokemonCard } from '../components/pokemon';
-import client from '../apollo-client';
+import client from '../config/apollo-client';
 import { gql } from '@apollo/client/core';
 import { AllPokemons, PokemonV2Pokemon } from '../interfaces/pokemon-graphql';
 import { SyntheticEvent, useState } from 'react';
