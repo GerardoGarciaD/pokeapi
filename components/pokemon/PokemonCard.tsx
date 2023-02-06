@@ -27,49 +27,102 @@ export const PokemonCard: FC<Props> = ({ pokemon }) => {
   };
 
   return (
-    <Grid item key={id} xs={6} sm={4} lg={3} xl={2}>
-      <Card
-        className={styles['card']}
-        style={{
-          background: `radial-gradient(circle at 50% 0%,${
-            typeColors[pokemonType as keyof typeof typeColors]
-          } 36%, #ffffff 36%)`,
-        }}
-      >
-        <CardContent>
-          <CardActionArea onClick={onClick}>
-            <Image
-              className={styles.pokemonImg}
-              src={img}
-              width={150}
-              height={150}
-              alt={name}
-            ></Image>
-            <Typography className={styles.capitalize} textAlign="center">
-              {name}
-            </Typography>
-          </CardActionArea>
-          <div className={styles.type}>
-            {pokemon.pokemon_v2_pokemontypes.map((type) => {
-              const pokemonType = type.pokemon_v2_type.name;
-              return (
-                <Button
-                  className={styles.capitalize}
-                  style={{
-                    background: `${
-                      typeColors[pokemonType as keyof typeof typeColors]
-                    }`,
-                    color: 'white',
-                  }}
-                  key={pokemonType}
-                >
-                  {pokemonType}
-                </Button>
-              );
-            })}
-          </div>
-        </CardContent>
-      </Card>
+    <Grid
+      className={styles['card-container']}
+      item
+      key={id}
+      xs={6}
+      sm={4}
+      lg={3}
+      xl={2}
+    >
+      <div className={styles['card']}>
+        <Card
+          className={styles.front}
+          style={{
+            background: `radial-gradient(circle at 50% 0%,${
+              typeColors[pokemonType as keyof typeof typeColors]
+            } 36%, #ffffff 36%)`,
+          }}
+        >
+          <CardContent>
+            <CardActionArea onClick={onClick}>
+              <Image
+                className={styles.pokemonImg}
+                src={img}
+                width={150}
+                height={150}
+                alt={name}
+              ></Image>
+              <Typography className={styles.capitalize} textAlign="center">
+                {name}
+              </Typography>
+            </CardActionArea>
+            <div className={styles.type}>
+              {pokemon.pokemon_v2_pokemontypes.map((type) => {
+                const pokemonType = type.pokemon_v2_type.name;
+                return (
+                  <Button
+                    className={styles.capitalize}
+                    style={{
+                      background: `${
+                        typeColors[pokemonType as keyof typeof typeColors]
+                      }`,
+                      color: 'white',
+                    }}
+                    key={pokemonType}
+                  >
+                    {pokemonType}
+                  </Button>
+                );
+              })}
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card
+          className={styles.back}
+          style={{
+            background: `radial-gradient(circle at 50% 0%,${
+              typeColors[pokemonType as keyof typeof typeColors]
+            } 36%, #ffffff 36%)`,
+          }}
+        >
+          <CardContent>
+            <CardActionArea onClick={onClick}>
+              <Image
+                className={styles.pokemonImg}
+                src={img}
+                width={150}
+                height={150}
+                alt={name}
+              ></Image>
+              <Typography className={styles.capitalize} textAlign="center">
+                {name}
+              </Typography>
+            </CardActionArea>
+            <div className={styles.type}>
+              {pokemon.pokemon_v2_pokemontypes.map((type) => {
+                const pokemonType = type.pokemon_v2_type.name;
+                return (
+                  <Button
+                    className={styles.capitalize}
+                    style={{
+                      background: `${
+                        typeColors[pokemonType as keyof typeof typeColors]
+                      }`,
+                      color: 'white',
+                    }}
+                    key={pokemonType}
+                  >
+                    {pokemonType}
+                  </Button>
+                );
+              })}
+            </div>
+          </CardContent>
+        </Card>
+      </div>
     </Grid>
   );
 };
