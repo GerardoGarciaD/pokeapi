@@ -24,16 +24,11 @@ export const Navbar = () => {
               onClick={() => onClick('/')}
               style={{ cursor: 'pointer' }}
               src="/PokeApi.svg"
-              width={100}
-              height={40}
+              width={130}
+              height={50}
               alt="PokeApi"
               color="primary"
             ></Image>
-          </Box>
-          <Box>
-            <Button onClick={() => onClick('/favorites')} color="primary">
-              Favoritos
-            </Button>
           </Box>
         </Toolbar>
       </AppBar>
