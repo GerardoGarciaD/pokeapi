@@ -10,8 +10,6 @@ interface Props {
 }
 
 const Home: NextPage<Props> = ({ pokemons }) => {
-  console.log(pokemons);
-
   return (
     <MainLayout title="Index PokeApi">
       <Grid container spacing={2}>
@@ -41,12 +39,9 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
   });
 
   const pokemons: PokemonV2Pokemon[] = data.pokemon_v2_pokemon.map(
-    (poke, id) => ({
-      ...poke,
-      id: id + 1,
-      img: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${
-        id + 1
-      }.svg`,
+    (pokemon) => ({
+      ...pokemon,
+      img: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${pokemon.id}.svg`,
     })
   );
 
