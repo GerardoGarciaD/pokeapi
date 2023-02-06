@@ -1,7 +1,7 @@
 import { GetServerSideProps, NextPage } from 'next';
 import React, { useEffect, useState } from 'react';
 import { MainLayout } from '../../components/layouts';
-import { Grid, Typography } from '@mui/material';
+import { Box, CircularProgress, Grid, Typography } from '@mui/material';
 import { NoFound } from '../../components/ui';
 import { localFavorites } from '../../utils';
 import { favoritePokemons } from '../../utils/localFavorites';
@@ -41,7 +41,28 @@ const Favorites: NextPage = () => {
     },
   });
 
-  if (loading) return null;
+  if (loading) {
+    return (
+      <MainLayout>
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            height: '70vh',
+          }}
+        >
+          <CircularProgress />
+        </Box>
+      </MainLayout>
+    );
+  }
+
+  if (error) {
+    <MainLayout>
+      <NoFound />
+    </MainLayout>;
+  }
 
   const pokemons: PokemonV2Pokemon[] =
     data?.pokemon_v2_pokemon.map((poke) => ({
