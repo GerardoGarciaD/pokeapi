@@ -4,7 +4,6 @@ import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import { Divider, Typography } from '@mui/material';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import FavoriteOutlinedIcon from '@mui/icons-material/FavoriteOutlined';
-
 import { localFavorites } from '../../utils';
 import client from '../../apollo-client';
 import {
@@ -24,6 +23,13 @@ import {
 } from '@mui/icons-material';
 import { favoritePokemons } from '../../utils/localFavorites';
 import Link from 'next/link';
+import Sound from 'react-sound';
+
+const enum playingStatusEnum {
+  playing = 'PLAYING',
+  paused = 'PAUSED',
+  stopped = 'STOPPED',
+}
 
 interface Props {
   pokemon: PokemonPokedex;
@@ -32,6 +38,9 @@ const PokemonByNamePage: NextPage<Props> = ({ pokemon }) => {
   const [isInFavorites, setIsInFavorites] = useState(false);
   const [favoritePokemons, setFavoritePokemons] = useState<favoritePokemons[]>(
     []
+  );
+  const [playingStatus, setPlayingStatus] = useState<playingStatusEnum>(
+    playingStatusEnum.playing
   );
 
   useEffect(() => {
@@ -43,6 +52,14 @@ const PokemonByNamePage: NextPage<Props> = ({ pokemon }) => {
       localFavorites.existsInFavorites({ id: pokemon.id, name: pokemon.name })
     );
   }, []);
+
+  const handlePlayingStatus = () => {
+    setPlayingStatus(
+      playingStatus === playingStatusEnum.playing
+        ? playingStatusEnum.paused
+        : playingStatusEnum.playing
+    );
+  };
 
   const lastTenfavoritePokemons: number[] = new Array(10).fill('');
 
@@ -65,8 +82,15 @@ const PokemonByNamePage: NextPage<Props> = ({ pokemon }) => {
   return (
     <MainLayout title={pokemon.name}>
       <div id={styles.pokedex}>
-        <div className={styles.sensor}>
-          <button></button>
+        <div
+          className={styles.sensor}
+          title={
+            playingStatus === playingStatusEnum.playing
+              ? 'Pause Music'
+              : 'Play Music'
+          }
+        >
+          <button onClick={handlePlayingStatus}></button>
         </div>
         <div
           className={styles['camera-display']}
@@ -208,6 +232,12 @@ const PokemonByNamePage: NextPage<Props> = ({ pokemon }) => {
           </Link>
         </div>
       </div>
+
+      <Sound
+        url="/music/battle1.mp3"
+        playStatus={playingStatus}
+        volume={50}
+      ></Sound>
     </MainLayout>
   );
 };
