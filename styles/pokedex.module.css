@@ -159,7 +159,7 @@
 }
 #cross .cross-button {
   background-color: #404040;
-  border: #303030;
+  border: #000000;
   color: red;
   cursor: pointer;
   border-style: solid;
@@ -195,7 +195,7 @@
   border-radius: 10px;
 }
 
-.bottom-modes {
+.buttons-favorites {
   grid-row-start: 4;
   grid-column-start: 4;
   margin-top: 30px;
@@ -211,7 +211,8 @@
 
 .black-button {
   background-color: #404040;
-  border: #303030 5px solid;
+  border: #000000 5px solid;
+  padding: 7px;
   color: gray;
   cursor: pointer;
 }

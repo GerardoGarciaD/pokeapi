@@ -18,3 +18,9 @@ export const pokemonTypes = [
   'steel',
   'water',
 ];
+
+export const enum playingStatusEnum {
+  playing = 'PLAYING',
+  paused = 'PAUSED',
+  stopped = 'STOPPED',
+}
