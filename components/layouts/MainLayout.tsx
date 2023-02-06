@@ -19,7 +19,7 @@ export const MainLayout: FC<Props> = ({ children, title }) => {
       <main
         style={{
           maxWidth: '90%',
-          margin: '4rem auto 4rem auto',
+          margin: '4rem auto',
           paddingBottom: '4rem',
         }}
       >
