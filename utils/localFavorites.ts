@@ -1,28 +1,36 @@
-const togglePokemonFavorites = (id: number) => {
-  console.log('Toggle clicked');
-  let favorites: number[] = JSON.parse(
+export interface favoritePokemons {
+  id: number;
+  name: string;
+}
+const togglePokemonFavorites = (favoritePokemon: favoritePokemons) => {
+  let favorites: favoritePokemons[] = JSON.parse(
     localStorage.getItem('favorites') || '[]'
   );
 
-  if (favorites.includes(id)) {
-    favorites = favorites.filter((pokeId) => pokeId !== id);
+  if (favorites.some((favPokemon) => favPokemon.id === favoritePokemon.id)) {
+    favorites = favorites.filter(
+      (favPokemon) => favPokemon.id !== favoritePokemon.id
+    );
   } else {
-    favorites.push(id);
+    favorites.unshift(favoritePokemon);
   }
   localStorage.setItem('favorites', JSON.stringify(favorites));
 };
 
-const existsInFavorites = (id: number): boolean => {
-  // Validation when the code is executed on the server
-  if (typeof window === 'undefined') return false;
-  const favorites: number[] = JSON.parse(
+const existsInFavorites = (favoritePokemon: favoritePokemons): boolean => {
+  const favorites: favoritePokemons[] = JSON.parse(
     localStorage.getItem('favorites') || '[]'
   );
 
-  return favorites.includes(id);
+  return favorites.some((favPokemon) => favPokemon.id === favoritePokemon.id);
+};
+
+const pokemons = (): favoritePokemons[] => {
+  return JSON.parse(localStorage.getItem('favorites') || '[]');
 };
 
 export default {
   togglePokemonFavorites,
   existsInFavorites,
+  pokemons,
 };
