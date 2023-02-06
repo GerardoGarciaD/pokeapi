@@ -2,32 +2,61 @@ import React, { useEffect, useState } from 'react';
 import { MainLayout } from '../../components/layouts';
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import { Divider, Typography } from '@mui/material';
-import Button from '@mui/material/Button';
+import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
+import FavoriteOutlinedIcon from '@mui/icons-material/FavoriteOutlined';
+
 import { localFavorites } from '../../utils';
 import client from '../../apollo-client';
 import {
-  AllPokemons,
   PokemonPokedex,
   PokemonPokedexInfo,
-  PokemonV2Pokemon,
   typeColors,
 } from '../../interfaces';
 import { gql } from '@apollo/client/core';
 import styles from '../../styles/pokedex.module.css';
 import Image from 'next/image';
+import Button from '@mui/material/Button';
+import {
+  ArrowDropUpSharp,
+  ArrowDropDownSharp,
+  ArrowLeftSharp,
+  ArrowRightSharp,
+} from '@mui/icons-material';
+import { favoritePokemons } from '../../utils/localFavorites';
+import Link from 'next/link';
 
 interface Props {
   pokemon: PokemonPokedex;
 }
 const PokemonByNamePage: NextPage<Props> = ({ pokemon }) => {
   const [isInFavorites, setIsInFavorites] = useState(false);
+  const [favoritePokemons, setFavoritePokemons] = useState<favoritePokemons[]>(
+    []
+  );
 
   useEffect(() => {
-    setIsInFavorites(localFavorites.existsInFavorites(pokemon.id));
+    setFavoritePokemons(localFavorites.pokemons());
   }, []);
 
+  useEffect(() => {
+    setIsInFavorites(
+      localFavorites.existsInFavorites({ id: pokemon.id, name: pokemon.name })
+    );
+  }, []);
+
+  const lastTenfavoritePokemons: number[] = new Array(10).fill('');
+
   const onClickFavorites = () => {
-    localFavorites.togglePokemonFavorites(pokemon.id);
+    localFavorites.togglePokemonFavorites({
+      id: pokemon.id,
+      name: pokemon.name,
+    });
+    setFavoritePokemons((prev) => {
+      if (favoritePokemons.some((favPokemon) => favPokemon.id === pokemon.id)) {
+        return prev.filter((favPokemon) => favPokemon.id !== pokemon.id);
+      }
+      return [{ id: pokemon.id, name: pokemon.name }, ...prev];
+    });
     setIsInFavorites(!isInFavorites);
   };
 
@@ -84,6 +113,7 @@ const PokemonByNamePage: NextPage<Props> = ({ pokemon }) => {
               </li>
             ))}
           </ul>
+
           <Typography mt={2} variant="h4" className={styles.capitalize}>
             Moves
           </Typography>
@@ -97,6 +127,7 @@ const PokemonByNamePage: NextPage<Props> = ({ pokemon }) => {
               </li>
             ))}
           </ul>
+
           <Typography mt={2} variant="h4" className={styles.capitalize}>
             Stats
           </Typography>
@@ -111,44 +142,70 @@ const PokemonByNamePage: NextPage<Props> = ({ pokemon }) => {
             ))}
           </ul>
         </div>
+
         <div className={styles['botom-actions']}>
           <div id={styles.actions}>
-            <button className={styles.a}></button>
+            <Button
+              onClick={onClickFavorites}
+              title={
+                !isInFavorites ? 'Add to favorites' : 'Remove from to favorites'
+              }
+              className={styles.a}
+            >
+              {!isInFavorites ? (
+                <FavoriteBorderOutlinedIcon color="error" fontSize="large" />
+              ) : (
+                <FavoriteOutlinedIcon color="error" fontSize="large" />
+              )}
+            </Button>
           </div>
           <div id={styles.cross}>
-            <button
-              className={`${styles['cross-button']} ${styles.up}`}
-            ></button>
-            <button
-              className={`${styles['cross-button']} ${styles.right}`}
-            ></button>
-            <button
-              className={`${styles['cross-button']} ${styles.down}`}
-            ></button>
-            <button
-              className={`${styles['cross-button']} ${styles.left}`}
-            ></button>
+            <button className={`${styles['cross-button']} ${styles.up}`}>
+              <ArrowDropUpSharp />
+            </button>
+            <button className={`${styles['cross-button']} ${styles.right}`}>
+              <ArrowLeftSharp />
+            </button>
+            <button className={`${styles['cross-button']} ${styles.down}`}>
+              <ArrowDropDownSharp />
+            </button>
+            <button className={`${styles['cross-button']} ${styles.left}`}>
+              <ArrowRightSharp />
+            </button>
             <div className={`${styles['cross-button']} ${styles.center}`}></div>
           </div>
         </div>
-        <div className={styles['input-pad']}>
-          <input />
-        </div>
 
         <div className={styles['bottom-modes']}>
-          <button className={styles['level-button']}></button>
-          <button className={styles['level-button']}></button>
-          <button className={styles['level-button']}></button>
-          <button className={styles['level-button']}></button>
+          <Typography className={styles['favorite-text']}>
+            Last Ten Favorite Pokemons
+          </Typography>
 
-          <button
-            className={`${styles['pokedex-mode']} ${styles['black-button']}`}
-          ></button>
-          <button
-            className={`${styles['game-mode']} ${styles['black-button']}`}
-          >
-            Game
-          </button>
+          {lastTenfavoritePokemons.map((element, i) => (
+            <button key={i} className={styles['level-button']}>
+              {!favoritePokemons[i] ? (
+                ''
+              ) : (
+                <Link href={`/pokemon/${favoritePokemons[i].name}`}>
+                  <Image
+                    title={favoritePokemons[i].name}
+                    src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/${favoritePokemons[i].id}.gif`}
+                    width={30}
+                    height={30}
+                    alt="pokemon"
+                  ></Image>
+                </Link>
+              )}
+            </button>
+          ))}
+
+          <Link href="/favorites">
+            <button
+              className={`${styles['pokedex-mode']} ${styles['black-button']}`}
+            >
+              <Typography>Go to all Favorites</Typography>
+            </button>
+          </Link>
         </div>
       </div>
     </MainLayout>
@@ -159,7 +216,7 @@ export const getStaticPaths: GetStaticPaths = async (ctx) => {
   const { data } = await client.query<PokemonPokedexInfo>({
     query: gql`
       query GetPokemonsNames {
-        pokemon_v2_pokemon(limit: 251) {
+        pokemon_v2_pokemon(limit: 50) {
           name
         }
       }
@@ -178,10 +235,11 @@ export const getStaticPaths: GetStaticPaths = async (ctx) => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   let { name } = params as { name: string };
+  name = name.split('_').join('-');
   const { data } = await client.query<PokemonPokedexInfo>({
     query: gql`
-      query GetPokemonsInfo {
-        pokemon_v2_pokemon(where: { name: { _eq: ${name}} }) {
+      query GetPokemon($pokemonName: String!) {
+        pokemon_v2_pokemon(where: { name: { _eq: $pokemonName } }) {
           name
           id
           pokemon_v2_pokemontypes {
@@ -210,6 +268,9 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
         }
       }
     `,
+    variables: {
+      pokemonName: name,
+    },
   });
 
   const { pokemon_v2_pokemon } = data;
