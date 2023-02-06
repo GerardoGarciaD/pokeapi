@@ -43,10 +43,11 @@ const Favorites: NextPage = () => {
 
   if (loading) return null;
 
-  const pokemons: PokemonV2Pokemon[] = data!.pokemon_v2_pokemon.map((poke) => ({
-    ...poke,
-    img: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${poke.id}.svg`,
-  }));
+  const pokemons: PokemonV2Pokemon[] =
+    data?.pokemon_v2_pokemon.map((poke) => ({
+      ...poke,
+      img: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${poke.id}.svg`,
+    })) || [];
   return (
     <MainLayout>
       {favoritePokemons.length === 0 ? (

@@ -24,6 +24,7 @@ import {
 import { favoritePokemons } from '../../utils/localFavorites';
 import Link from 'next/link';
 import Sound from 'react-sound';
+import confetti from 'canvas-confetti';
 
 const enum playingStatusEnum {
   playing = 'PLAYING',
@@ -75,6 +76,18 @@ const PokemonByNamePage: NextPage<Props> = ({ pokemon }) => {
       return [{ id: pokemon.id, name: pokemon.name }, ...prev];
     });
     setIsInFavorites(!isInFavorites);
+    if (!isInFavorites) {
+      confetti({
+        zIndex: 999,
+        particleCount: 250,
+        spread: 360,
+        angle: 0,
+        origin: {
+          x: 0.5,
+          y: 0.5,
+        },
+      });
+    }
   };
 
   const pokemonType = pokemon.pokemon_v2_pokemontypes[0].pokemon_v2_type.name;
