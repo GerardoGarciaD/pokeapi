@@ -5,6 +5,7 @@ export interface AllPokemons {
 }
 
 export interface PokemonV2Pokemon {
+  label: string;
   name: string;
   id: number;
   img: string;
