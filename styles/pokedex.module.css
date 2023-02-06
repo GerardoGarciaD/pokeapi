@@ -125,7 +125,7 @@
   border-radius: 50%;
   width: 60px;
   height: 60px;
-  background-color: #404040;
+  background-color: #eff3ff;
   border: 5px solid #303030;
   cursor: pointer;
 }
@@ -148,48 +148,47 @@
   grid-row-start: 1;
   grid-column-start: 2;
   border-width: 5px 5px 0px 5px;
+  border-radius: 10px;
 }
 #cross .right {
   grid-row-start: 2;
   grid-column-start: 1;
   border-width: 5px 0px 5px 5px;
+  border-radius: 10px;
 }
 #cross .down {
   grid-row-start: 3;
   grid-column-start: 2;
   border-width: 0px 5px 5px 5px;
+  border-radius: 10px;
 }
 #cross .left {
   grid-row-start: 2;
   grid-column-start: 3;
   border-width: 5px 5px 5px 0px;
+  border-radius: 10px;
 }
 #cross .center {
   grid-row-start: 2;
   grid-column-start: 2;
-  border-width: 0;
+  border-width: 5px;
+  border-radius: 10px;
 }
-.input-pad {
+
+.bottom-modes {
   grid-row-start: 4;
   grid-column-start: 4;
-}
-.input-pad input {
-  width: 93%;
-  height: 50px;
   margin-top: 30px;
-  padding: 0 10px;
-  background-color: #e6e6e6;
-  font-family: 'Press Start 2P';
-  font-size: 20px;
-}
-.bottom-modes {
-  grid-row-start: 5;
-  grid-row-start: 5;
-  grid-column-start: 4;
+  gap: 10px;
   display: grid;
-  grid-template-columns: 25% 25% 25% 25%;
-  grid-template-rows: 40% 20% 40%;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 20% 40% 40%;
 }
+.favorite-text {
+  grid-column-start: 1;
+  grid-column-end: 6;
+}
+
 .black-button {
   background-color: #404040;
   border: #303030 5px solid;
@@ -197,18 +196,16 @@
   cursor: pointer;
 }
 .pokedex-mode {
-  grid-row-start: 3;
+  grid-row-start: 5;
+  grid-row-end: 6;
   grid-column-start: 1;
-  grid-column-end: 3;
+  grid-column-end: 6;
 }
-.game-mode {
-  grid-row-start: 3;
-  grid-column-start: 3;
-  grid-column-end: 5;
-}
+
 .level-button {
   background-color: #1697f9;
   border: #71cdf4 5px solid;
+  border-radius: 10px;
   color: gray;
   cursor: pointer;
 }
