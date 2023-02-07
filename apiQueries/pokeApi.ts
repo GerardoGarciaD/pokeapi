@@ -70,7 +70,7 @@ export const getPokemonInfo = async (
   return pokemon_v2_pokemon;
 };
 
-export const get251Pokemons = async (): Promise<PokemonV2Pokemon[]> => {
+export const getPokemons = async (): Promise<PokemonV2Pokemon[]> => {
   const {
     data: { pokemon_v2_pokemon },
   } = await client.query<AllPokemons>({
