@@ -50,3 +50,11 @@ export enum Name {
 export interface PokemonV2Pokemontype {
   pokemon_v2_type: PokemonV2;
 }
+
+export interface PrevNextPokemons {
+  pokemon_v2_pokemon: PokemonsNamesPrevNext[];
+}
+
+export interface PokemonsNamesPrevNext {
+  name: string;
+}
