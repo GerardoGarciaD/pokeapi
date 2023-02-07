@@ -2,13 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { MainLayout } from '../../components/layouts';
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import { localFavorites } from '../../utils';
-import client from '../../config/apollo-client';
-import {
-  PokemonPokedex,
-  PokemonPokedexInfo,
-  typeColors,
-} from '../../interfaces';
-import { gql } from '@apollo/client/core';
+import { PokemonPokedex, typeColors } from '../../interfaces';
 import styles from '../../styles/pokedex.module.css';
 import Image from 'next/image';
 import { favoritePokemons } from '../../utils/localFavorites';
@@ -20,6 +14,7 @@ import {
   StatsDisplay,
 } from '../../components/pokedex';
 import { playingStatusEnum } from '../../interfaces';
+import { getPokemonInfo, getPokemonsNames } from '../../apiQueries';
 
 interface Props {
   pokemon: PokemonPokedex;
@@ -130,17 +125,7 @@ const PokemonByNamePage: NextPage<Props> = ({ pokemon }) => {
 };
 
 export const getStaticPaths: GetStaticPaths = async (ctx) => {
-  const { data } = await client.query<PokemonPokedexInfo>({
-    query: gql`
-      query GetPokemonsNames {
-        pokemon_v2_pokemon(limit: 50) {
-          name
-        }
-      }
-    `,
-  });
-
-  const pokemons251: PokemonPokedex[] = data.pokemon_v2_pokemon;
+  const pokemons251: PokemonPokedex[] = await getPokemonsNames();
 
   return {
     paths: pokemons251.map((pokemon) => ({
@@ -153,44 +138,8 @@ export const getStaticPaths: GetStaticPaths = async (ctx) => {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   let { name } = params as { name: string };
   name = name.split('_').join('-');
-  const { data } = await client.query<PokemonPokedexInfo>({
-    query: gql`
-      query GetPokemon($pokemonName: String!) {
-        pokemon_v2_pokemon(where: { name: { _eq: $pokemonName } }) {
-          name
-          id
-          pokemon_v2_pokemontypes {
-            pokemon_v2_type {
-              name
-            }
-          }
-          pokemon_v2_pokemonstats {
-            base_stat
-            pokemon_v2_stat {
-              name
-            }
-          }
-          pokemon_v2_pokemonmoves(limit: 4, distinct_on: move_id) {
-            pokemon_v2_move {
-              name
-              id
-            }
-          }
-          pokemon_v2_pokemonabilities(limit: 4) {
-            pokemon_v2_ability {
-              name
-              id
-            }
-          }
-        }
-      }
-    `,
-    variables: {
-      pokemonName: name,
-    },
-  });
 
-  const { pokemon_v2_pokemon } = data;
+  const pokemon_v2_pokemon = await getPokemonInfo(name);
   if (!pokemon_v2_pokemon.length) {
     return {
       redirect: {
@@ -209,7 +158,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   return {
     props: {
-      pokemon: pokemon,
+      pokemon,
     },
   };
 };

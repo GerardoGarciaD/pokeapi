@@ -2,9 +2,7 @@ import type { GetStaticProps, NextPage } from 'next';
 import { MainLayout } from '../components/layouts';
 import Grid from '@mui/material/Grid';
 import { PokemonCard } from '../components/pokemon';
-import client from '../config/apollo-client';
-import { gql } from '@apollo/client/core';
-import { AllPokemons, PokemonV2Pokemon } from '../interfaces/pokemon-graphql';
+import { PokemonV2Pokemon } from '../interfaces/pokemon-graphql';
 import { SyntheticEvent, useState } from 'react';
 import {
   FormControl,
@@ -19,6 +17,7 @@ import {
 } from '@mui/material';
 import { pokemonTypes } from '../interfaces';
 import { useRouter } from 'next/router';
+import { get251Pokemons } from '../apiQueries';
 
 interface Props {
   pokemons: PokemonV2Pokemon[];
@@ -94,33 +93,17 @@ const Home: NextPage<Props> = ({ pokemons }) => {
 };
 
 export const getStaticProps: GetStaticProps = async (ctx) => {
-  const { data } = await client.query<AllPokemons>({
-    query: gql`
-      query GetPokemonsInfo {
-        pokemon_v2_pokemon(limit: 251) {
-          name
-          id
-          pokemon_v2_pokemontypes {
-            pokemon_v2_type {
-              name
-            }
-          }
-        }
-      }
-    `,
-  });
+  let pokemons: PokemonV2Pokemon[] = await get251Pokemons();
 
-  const pokemons: PokemonV2Pokemon[] = data.pokemon_v2_pokemon.map(
-    (pokemon) => ({
-      ...pokemon,
-      label: pokemon.name,
-      img: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${pokemon.id}.svg`,
-    })
-  );
+  pokemons = pokemons.map((pokemon) => ({
+    ...pokemon,
+    label: pokemon.name,
+    img: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${pokemon.id}.svg`,
+  }));
 
   return {
     props: {
-      pokemons: pokemons,
+      pokemons,
     },
   };
 };
