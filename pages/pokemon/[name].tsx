@@ -2,7 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { MainLayout } from '../../components/layouts';
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import { localFavorites } from '../../utils';
-import { PokemonPokedex, typeColors } from '../../interfaces';
+import {
+  PokemonPokedex,
+  PokemonsNamesPrevNext,
+  typeColors,
+} from '../../interfaces';
 import styles from '../../styles/pokedex.module.css';
 import Image from 'next/image';
 import { favoritePokemons } from '../../utils/localFavorites';
@@ -14,14 +18,24 @@ import {
   StatsDisplay,
 } from '../../components/pokedex';
 import { playingStatusEnum } from '../../interfaces';
-import { getPokemonInfo, getPokemonsNames } from '../../apiQueries';
+import {
+  getPokemonInfo,
+  getPokemonsNames,
+  getPrevaAndNextPokemon,
+} from '../../apiQueries';
 import { HeaderText } from '../../components/ui';
 
 interface Props {
   pokemon: PokemonPokedex;
+  prevPokemon: PokemonsNamesPrevNext;
+  nextPokemon: PokemonsNamesPrevNext;
 }
 
-const PokemonByNamePage: NextPage<Props> = ({ pokemon }) => {
+const PokemonByNamePage: NextPage<Props> = ({
+  pokemon,
+  prevPokemon,
+  nextPokemon,
+}) => {
   const [isInFavorites, setIsInFavorites] = useState(false);
   const [favoritePokemonsList, setFavoritePokemonsList] = useState<
     favoritePokemons[]
@@ -38,7 +52,7 @@ const PokemonByNamePage: NextPage<Props> = ({ pokemon }) => {
     setIsInFavorites(
       localFavorites.existsInFavorites({ id: pokemon.id, name: pokemon.name })
     );
-  }, []);
+  }, [pokemon.id, pokemon.name]);
 
   const handlePlayingStatus = () => {
     setPlayingStatus(
@@ -109,6 +123,8 @@ const PokemonByNamePage: NextPage<Props> = ({ pokemon }) => {
         <ButtonActions
           isInFavorites={isInFavorites}
           onClickFavorites={onClickFavorites}
+          prevPokemon={prevPokemon}
+          nextPokemon={nextPokemon}
         />
 
         <ButtonsFavorites
@@ -158,9 +174,17 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     img: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${firstPokemon.id}.svg`,
   };
 
+  const prevPokemonId = pokemon.id - 1 === 0 ? 649 : pokemon.id - 1;
+  const nextPokemonId = pokemon.id + 1 === 650 ? 1 : pokemon.id + 1;
+
+  const [prevPokemon] = await getPrevaAndNextPokemon(prevPokemonId);
+  const [nextPokemon] = await getPrevaAndNextPokemon(nextPokemonId);
+
   return {
     props: {
       pokemon,
+      prevPokemon,
+      nextPokemon,
     },
   };
 };
