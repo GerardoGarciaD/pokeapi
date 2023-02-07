@@ -9,7 +9,7 @@ interface Props {
 
 export const HeaderText: FC<Props> = ({ headerText }) => {
   return (
-    <Box mb={4} mt={0} display="flex" justifyContent="center">
+    <Box mb={4} mt={0} display="flex" flexWrap={'wrap'} justifyContent="center">
       <Typography className={styles['header-text']} variant="h1">
         {headerText}
       </Typography>
