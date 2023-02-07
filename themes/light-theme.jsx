@@ -75,9 +75,13 @@ export const lightTheme = createTheme({
   typography: {
     fontFamily: ['Press Start 2P', 'sans-serif'].join(','),
     fontSize: 12,
+    letterSpacing: '10px',
+
     h1: {
       fontFamily: ['Press Start 2P', 'sans-serif'].join(','),
-      fontSize: 40,
+      fontSize: 60,
+      padding: 0,
+      lineHeight: '10px',
     },
     h2: {
       fontFamily: ['Press Start 2P', 'sans-serif'].join(','),
