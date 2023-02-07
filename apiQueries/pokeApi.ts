@@ -5,6 +5,8 @@ import {
   PokemonPokedex,
   PokemonPokedexInfo,
   PokemonV2Pokemon,
+  PokemonsNamesPrevNext,
+  PrevNextPokemons,
 } from '../interfaces';
 
 export const getPokemonsNames = async (): Promise<PokemonPokedex[]> => {
@@ -85,6 +87,28 @@ export const get251Pokemons = async (): Promise<PokemonV2Pokemon[]> => {
         }
       }
     `,
+  });
+
+  return pokemon_v2_pokemon;
+};
+
+export const getPrevaAndNextPokemon = async (
+  pokemonId: number
+): Promise<PokemonsNamesPrevNext[]> => {
+  const {
+    data: { pokemon_v2_pokemon },
+  } = await client.query<PrevNextPokemons>({
+    query: gql`
+      query GetPrevNextPokemons($id: Int!) {
+        pokemon_v2_pokemon(where: { id: { _eq: $id } }) {
+          name
+          id
+        }
+      }
+    `,
+    variables: {
+      id: pokemonId,
+    },
   });
 
   return pokemon_v2_pokemon;
