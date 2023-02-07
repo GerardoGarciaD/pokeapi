@@ -1,24 +1,13 @@
-import type { GetStaticProps, NextPage } from 'next';
-import { MainLayout } from '../components/layouts';
-import Grid from '@mui/material/Grid';
-import { PokemonCard } from '../components/pokemon';
-import { PokemonV2Pokemon } from '../interfaces/pokemon-graphql';
 import { SyntheticEvent, useState } from 'react';
-import {
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
-  ListItemText,
-  SelectChangeEvent,
-  Autocomplete,
-  TextField,
-  Box,
-} from '@mui/material';
-import { pokemonTypes } from '../interfaces';
+import type { GetStaticProps, NextPage } from 'next';
 import { useRouter } from 'next/router';
-import { get251Pokemons } from '../apiQueries';
+import Grid from '@mui/material/Grid';
+import { PokemonV2Pokemon } from '../interfaces/pokemon-graphql';
+import { SelectChangeEvent, Box } from '@mui/material';
+import { PokemonCard, PokemonFilters } from '../components/pokemon';
+import { MainLayout } from '../components/layouts';
 import { HeaderText } from '../components/ui';
+import { getPokemons } from '../apiQueries';
 
 interface Props {
   pokemons: PokemonV2Pokemon[];
@@ -48,40 +37,12 @@ const Home: NextPage<Props> = ({ pokemons }) => {
   return (
     <MainLayout title="Index PokeApi">
       <HeaderText headerText="All Pokemons" />
-      <Box display="flex" justifyContent="space-between">
-        <FormControl sx={{ mb: 4, width: 300 }}>
-          <InputLabel id="typeSelectLabel">Type</InputLabel>
-          <Select
-            labelId="typeSelectLabel"
-            id="demo-simple-select"
-            value={pokemonType}
-            label="Type"
-            onChange={handleChange}
-          >
-            <MenuItem value={''}>
-              <ListItemText primary={'All'} />
-            </MenuItem>
-            {pokemonTypes.map((type) => (
-              <MenuItem key={type} value={type}>
-                <ListItemText
-                  style={{ textTransform: 'capitalize' }}
-                  primary={type}
-                />
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-
-        <Autocomplete
-          disablePortal
-          id="searchPokemonName"
-          onInputChange={(event, value) => handleChangeName(event, value)}
-          // onChange={(event, value) => handleChangeName(event, value)}
-          options={pokemonsfiltered}
-          sx={{ width: 300 }}
-          renderInput={(params) => (
-            <TextField {...params} label="Pokemon Name" />
-          )}
+      <Box mt={8} display="flex" justifyContent="space-between">
+        <PokemonFilters
+          pokemonType={pokemonType}
+          handleChange={handleChange}
+          handleChangeName={handleChangeName}
+          pokemonsfiltered={pokemonsfiltered}
         />
       </Box>
 
@@ -95,7 +56,7 @@ const Home: NextPage<Props> = ({ pokemons }) => {
 };
 
 export const getStaticProps: GetStaticProps = async (ctx) => {
-  let pokemons: PokemonV2Pokemon[] = await get251Pokemons();
+  let pokemons: PokemonV2Pokemon[] = await getPokemons();
 
   pokemons = pokemons.map((pokemon) => ({
     ...pokemon,
