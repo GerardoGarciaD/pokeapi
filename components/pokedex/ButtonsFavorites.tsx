@@ -31,7 +31,6 @@ export const ButtonsFavorites: FC<Props> = ({
 
       <Link
         href="/favorites"
-        style={{ textDecoration: 'none' }}
         className={`${styles['pokedex-mode']} ${styles['black-button']}`}
       >
         <Typography textAlign="center">Go to all Favorites</Typography>

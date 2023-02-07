@@ -1,4 +1,4 @@
-import { Box, AppBar, Toolbar, Button, Typography } from '@mui/material';
+import { Box, AppBar, Toolbar } from '@mui/material';
 import React from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';

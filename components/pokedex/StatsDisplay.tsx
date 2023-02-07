@@ -32,7 +32,7 @@ export const StatsDisplay: FC<Props> = ({ pokemon }) => {
         Type
       </Typography>
 
-      <ul style={{ listStyleType: 'none' }}>
+      <ul>
         {pokemon_v2_pokemontypes.map((pokemonType) => (
           <li
             className={styles.capitalize}
@@ -46,7 +46,7 @@ export const StatsDisplay: FC<Props> = ({ pokemon }) => {
       <Typography mt={2} variant="h4" className={styles.capitalize}>
         Abilities
       </Typography>
-      <ul style={{ listStyleType: 'none' }}>
+      <ul>
         {pokemon_v2_pokemonabilities.map((pokemonAbility) => (
           <li
             className={styles.capitalize}
@@ -60,7 +60,7 @@ export const StatsDisplay: FC<Props> = ({ pokemon }) => {
       <Typography mt={2} variant="h4" className={styles.capitalize}>
         Moves
       </Typography>
-      <ul style={{ listStyleType: 'none' }}>
+      <ul>
         {pokemon_v2_pokemonmoves.map((pokemonMove) => (
           <li
             className={styles.capitalize}
@@ -74,7 +74,7 @@ export const StatsDisplay: FC<Props> = ({ pokemon }) => {
       <Typography mt={2} variant="h4" className={styles.capitalize}>
         Stats
       </Typography>
-      <ul style={{ listStyleType: 'none' }}>
+      <ul>
         {pokemon_v2_pokemonstats.map((pokemonStats) => (
           <li
             className={styles.capitalize}

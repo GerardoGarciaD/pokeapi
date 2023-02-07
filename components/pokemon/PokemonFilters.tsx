@@ -59,11 +59,7 @@ export const PokemonFilters: FC<Props> = ({
         options={pokemonsfiltered}
         sx={{ width: 300 }}
         renderInput={(params) => (
-          <TextField
-            {...params}
-            style={{ textTransform: 'capitalize' }}
-            label="Search by name"
-          />
+          <TextField {...params} label="Search by name" />
         )}
       />
     </>

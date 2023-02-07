@@ -93,6 +93,7 @@
   margin: 10px 0;
 }
 .stats-display ul {
+  list-style: none;
   margin: 10px;
   overflow: auto;
 }
@@ -224,6 +225,7 @@
   grid-row-end: 6;
   grid-column-start: 1;
   grid-column-end: 6;
+  text-decoration: none;
 }
 
 .level-button {
