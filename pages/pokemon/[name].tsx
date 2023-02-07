@@ -15,6 +15,7 @@ import {
 } from '../../components/pokedex';
 import { playingStatusEnum } from '../../interfaces';
 import { getPokemonInfo, getPokemonsNames } from '../../apiQueries';
+import { HeaderText } from '../../components/ui';
 
 interface Props {
   pokemon: PokemonPokedex;
@@ -81,6 +82,7 @@ const PokemonByNamePage: NextPage<Props> = ({ pokemon }) => {
 
   return (
     <MainLayout title={pokemon.name}>
+      <HeaderText headerText="Pokedex" />
       <div id={styles.pokedex}>
         <div
           className={styles.sensor}

@@ -1,8 +1,8 @@
-import { GetServerSideProps, NextPage } from 'next';
+import { NextPage } from 'next';
 import React, { useEffect, useState } from 'react';
 import { MainLayout } from '../../components/layouts';
-import { Box, CircularProgress, Grid, Typography } from '@mui/material';
-import { NoFound } from '../../components/ui';
+import { Box, CircularProgress, Grid } from '@mui/material';
+import { HeaderText, NoFound } from '../../components/ui';
 import { localFavorites } from '../../utils';
 import { favoritePokemons } from '../../utils/localFavorites';
 import { AllPokemons, PokemonV2Pokemon } from '../../interfaces';
@@ -71,11 +71,12 @@ const Favorites: NextPage = () => {
     })) || [];
   return (
     <MainLayout>
+      <HeaderText headerText="Favorite Pokemons" />
       {favoritePokemons.length === 0 ? (
         <NoFound />
       ) : (
         <>
-          <Grid container spacing={2}>
+          <Grid mt={7} container spacing={2}>
             {pokemons.map((pokemon) => (
               <PokemonCard key={pokemon.id} pokemon={pokemon}></PokemonCard>
             ))}

@@ -18,6 +18,7 @@ import {
 import { pokemonTypes } from '../interfaces';
 import { useRouter } from 'next/router';
 import { get251Pokemons } from '../apiQueries';
+import { HeaderText } from '../components/ui';
 
 interface Props {
   pokemons: PokemonV2Pokemon[];
@@ -46,6 +47,7 @@ const Home: NextPage<Props> = ({ pokemons }) => {
 
   return (
     <MainLayout title="Index PokeApi">
+      <HeaderText headerText="All Pokemons" />
       <Box display="flex" justifyContent="space-between">
         <FormControl sx={{ mb: 4, width: 300 }}>
           <InputLabel id="typeSelectLabel">Type</InputLabel>
