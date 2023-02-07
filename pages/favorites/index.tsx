@@ -75,7 +75,7 @@ const Favorites: NextPage = () => {
       ],
     })) || [];
   return (
-    <MainLayout>
+    <MainLayout title="Favorites Pokemon">
       <HeaderText headerText="Favorite Pokémon" />
       {favoritePokemons.length === 0 ? (
         <NoFound />
