@@ -6,7 +6,7 @@ export interface PokemonV2Pokemon {
   label: string;
   name: string;
   id: number;
-  img: string;
+  imgs: string[];
   pokemon_v2_pokemontypes: PokemonV2Pokemontype[];
   pokemon_v2_pokemonstats: PokemonV2Pokemonstat[];
 }

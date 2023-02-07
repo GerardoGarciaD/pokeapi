@@ -63,3 +63,12 @@
 .capitalize {
   text-transform: capitalize;
 }
+
+.card-carousel {
+  height: 100%;
+  display: flex;
+  gap: 100px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

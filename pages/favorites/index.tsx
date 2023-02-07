@@ -65,13 +65,18 @@ const Favorites: NextPage = () => {
   }
 
   const pokemons: PokemonV2Pokemon[] =
-    data?.pokemon_v2_pokemon.map((poke) => ({
-      ...poke,
-      img: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${poke.id}.svg`,
+    data?.pokemon_v2_pokemon.map((pokemon) => ({
+      ...pokemon,
+      imgs: [
+        `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/${pokemon.id}.gif`,
+        `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${pokemon.id}.png`,
+        `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png`,
+        `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${pokemon.id}.svg`,
+      ],
     })) || [];
   return (
     <MainLayout>
-      <HeaderText headerText="Favorite Pokemons" />
+      <HeaderText headerText="Favorite Pokémon" />
       {favoritePokemons.length === 0 ? (
         <NoFound />
       ) : (

@@ -12,6 +12,7 @@ import styles from '../../styles/pokemonCard.module.css';
 import { PokemonV2Pokemon } from '../../interfaces/pokemon-graphql';
 import Button from '@mui/material/Button';
 import { typeColors } from '../../interfaces';
+import Carousel from 'react-material-ui-carousel';
 
 interface Props {
   pokemon: PokemonV2Pokemon;
@@ -19,13 +20,14 @@ interface Props {
 
 export const PokemonCard: FC<Props> = ({ pokemon }) => {
   const router = useRouter();
-  const { id, name, img, pokemon_v2_pokemontypes } = pokemon;
+  const { id, name, imgs, pokemon_v2_pokemontypes } = pokemon;
   const pokemonType = pokemon_v2_pokemontypes[0].pokemon_v2_type.name;
 
   const onClick = () => {
     router.push(`/pokemon/${name}`);
   };
 
+  const [pokemonSVG] = imgs;
   return (
     <Grid
       className={styles['card-container']}
@@ -49,7 +51,7 @@ export const PokemonCard: FC<Props> = ({ pokemon }) => {
             <CardActionArea onClick={onClick}>
               <Image
                 className={styles.pokemonImg}
-                src={img}
+                src={pokemonSVG}
                 width={150}
                 height={150}
                 alt={name}
@@ -88,39 +90,51 @@ export const PokemonCard: FC<Props> = ({ pokemon }) => {
             } 36%, #ffffff 36%)`,
           }}
         >
-          <CardContent>
-            <CardActionArea onClick={onClick}>
-              <Image
-                className={styles.pokemonImg}
-                src={img}
-                width={150}
-                height={150}
-                alt={name}
-              ></Image>
-              <Typography className={styles.capitalize} textAlign="center">
-                {name}
-              </Typography>
-            </CardActionArea>
-            <div className={styles.type}>
-              {pokemon.pokemon_v2_pokemontypes.map((type) => {
-                const pokemonType = type.pokemon_v2_type.name;
-                return (
-                  <Button
-                    className={styles.capitalize}
-                    style={{
-                      background: `${
-                        typeColors[pokemonType as keyof typeof typeColors]
-                      }`,
-                      color: 'white',
-                    }}
-                    key={pokemonType}
-                  >
-                    {pokemonType}
-                  </Button>
-                );
-              })}
-            </div>
-          </CardContent>
+          <Carousel
+            stopAutoPlayOnHover={false}
+            autoPlay={false}
+            animation="slide"
+            duration={300}
+            indicators={true}
+            swipe={true}
+            className={styles['card-carousel']}
+          >
+            <Image
+              className={styles.pokemonImg}
+              src={imgs[3]}
+              width={150}
+              height={150}
+              alt={name}
+              onClick={onClick}
+            ></Image>
+
+            <Image
+              className={styles.pokemonImg}
+              src={imgs[2]}
+              width={150}
+              height={150}
+              alt={name}
+              onClick={onClick}
+            ></Image>
+
+            <Image
+              className={styles.pokemonImg}
+              src={imgs[1]}
+              width={150}
+              height={150}
+              alt={name}
+              onClick={onClick}
+            ></Image>
+
+            <Image
+              className={styles.pokemonImg}
+              src={imgs[0]}
+              width={150}
+              height={150}
+              alt={name}
+              onClick={onClick}
+            ></Image>
+          </Carousel>
         </Card>
       </div>
     </Grid>

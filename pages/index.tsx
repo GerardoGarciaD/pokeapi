@@ -36,7 +36,7 @@ const Home: NextPage<Props> = ({ pokemons }) => {
 
   return (
     <MainLayout title="Index PokeApi">
-      <HeaderText headerText="All Pokemons" />
+      <HeaderText headerText="All Pokémon" />
       <Box mt={8} display="flex" justifyContent="space-between">
         <PokemonFilters
           pokemonType={pokemonType}
@@ -61,7 +61,12 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
   pokemons = pokemons.map((pokemon) => ({
     ...pokemon,
     label: pokemon.name,
-    img: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${pokemon.id}.svg`,
+    imgs: [
+      `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${pokemon.id}.svg`,
+      `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${pokemon.id}.png`,
+      `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png`,
+      `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/${pokemon.id}.gif`,
+    ],
   }));
 
   return {
