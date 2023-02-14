@@ -114,7 +114,7 @@ const PokemonByNamePage: NextPage<Props> = ({
             background: typeColors[pokemonType as keyof typeof typeColors],
           }}
         >
-          <Image src={pokemon.img} width={1} height={1} alt={pokemon.name} />
+          <Image src={pokemon.img} fill alt={pokemon.name} />
         </div>
         <div className={styles.divider}></div>
 

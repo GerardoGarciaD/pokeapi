@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
 import { Typography } from '@mui/material';
 import { favoritePokemons } from '../../utils/localFavorites';
@@ -17,7 +16,10 @@ export const ButtonsFavorites: FC<Props> = ({
 }) => {
   return (
     <div className={styles['buttons-favorites']}>
-      <Typography className={styles['favorite-text']}>
+      <Typography
+        sx={{ typography: { xs: 'body2', md: 'body1' } }}
+        className={styles['favorite-text']}
+      >
         Last Ten Favorite Pokemons
       </Typography>
 
@@ -33,7 +35,12 @@ export const ButtonsFavorites: FC<Props> = ({
         href="/favorites"
         className={`${styles['pokedex-mode']} ${styles['black-button']}`}
       >
-        <Typography textAlign="center">Go to all Favorites</Typography>
+        <Typography
+          sx={{ typography: { xs: 'body2', md: 'h5' } }}
+          textAlign="center"
+        >
+          Go to all Favorites
+        </Typography>
       </Link>
     </div>
   );

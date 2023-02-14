@@ -15,6 +15,7 @@
   border-radius: 2%;
   font-family: 'Press Start 2P', sans-serif;
 }
+
 .camera-display {
   border-radius: 5%;
   border: 30px solid #e6e6e6;
@@ -22,11 +23,14 @@
   grid-row-start: 3;
   grid-row-end: 5;
 }
+
 .camera-display img {
-  width: 90%;
-  height: 90%;
+  width: 90% !important;
+  height: 90% !important;
+  object-fit: contain;
+  margin: 10px auto;
   display: block;
-  margin: 20px auto;
+  position: relative !important;
   animation: blinkingImage 1s ease-in 1s 3 alternate-reverse;
 }
 
@@ -67,6 +71,11 @@
   animation: blinkingDisplay 1.9s ease-in alternate-reverse infinite;
 }
 
+.favorite-pokemon {
+  object-fit: contain;
+  position: relative !important;
+}
+
 @keyframes blinkingDisplay {
   0% {
     background-color: #bcf5cd;
@@ -102,6 +111,7 @@
   grid-column-start: 2;
   grid-row-start: 2;
 }
+
 .sensor button {
   cursor: pointer;
   background: #71cdf4;
@@ -141,6 +151,7 @@
   grid-template-columns: 25% 25% 15% 35%;
   grid-template-rows: 10% 80% 10%;
 }
+
 #actions {
   grid-column-start: 1;
   grid-row-start: 2;
@@ -148,19 +159,20 @@
 }
 #actions .a {
   border-radius: 50%;
-  width: 60px;
-  height: 60px;
+  width: 5em;
+  height: 5em;
   background-color: #eff3ff;
-  border: 5px solid #303030;
+  border: 3px solid #303030;
   cursor: pointer;
 }
+
 #cross {
   grid-column-start: 4;
   grid-row-start: 2;
   grid-row-end: 5;
   display: grid;
-  grid-template-columns: 33.33% 33.33% 33.33%;
-  grid-template-rows: 33.33% 33.33% 33.33%;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
 }
 #cross .cross-button {
   background-color: #404040;
@@ -168,6 +180,7 @@
   color: red;
   cursor: pointer;
   border-style: solid;
+  text-align: center;
 }
 #cross .up {
   grid-row-start: 1;
@@ -235,6 +248,73 @@
   border-radius: 10px;
   color: gray;
   cursor: pointer;
+}
+
+@media (max-width: 800px) {
+  #pokedex {
+    grid-template-columns: 1fr;
+    grid-template-rows: 10% 30% 13% 2% 20% 15% 10%;
+    width: 100%;
+    max-height: 90vh;
+  }
+
+  .camera-display {
+    grid-column-start: 1;
+    grid-row-start: 2;
+    grid-row-end: 3;
+    border: 10px solid #e6e6e6;
+    margin: 10px;
+  }
+
+  .divider {
+    grid-column-start: 1;
+    grid-row-start: 4;
+    grid-row-end: 5;
+    margin: 0;
+  }
+
+  .stats-display {
+    grid-column-start: 1;
+    grid-row-start: 5;
+    margin: 10px;
+  }
+
+  .sensor {
+    grid-column-start: 1;
+    grid-row-start: 1;
+    grid-row-end: 2;
+    margin-top: 25px;
+  }
+
+  .sensor button {
+    width: 3em;
+    height: 3em;
+  }
+
+  .botom-actions {
+    grid-column-start: 1;
+    grid-row-start: 3;
+    margin: 0 10px;
+    margin-bottom: 10px;
+    grid-template-columns: 30% 40% 30%;
+  }
+
+  #cross {
+    grid-column-start: 3;
+    grid-template-columns: repeat(3, 30%);
+    grid-template-rows: repeat(3, 30%);
+  }
+
+  .buttons-favorites {
+    grid-column-start: 1;
+    grid-row-start: 6;
+    margin: 10px;
+  }
+
+  .pokedex-mode {
+    grid-column-start: 1;
+    grid-row-start: 4;
+  }
 }
 
 .capitalize {

@@ -19,8 +19,8 @@ export const ButtonFavorite: FC<Props> = ({ favoritePokemonsList, index }) => {
           <Image
             title={favoritePokemonsList[index].name}
             src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/${favoritePokemonsList[index].id}.gif`}
-            width={30}
-            height={30}
+            fill
+            className={styles['favorite-pokemon']}
             alt="pokemon"
           ></Image>
         </Link>

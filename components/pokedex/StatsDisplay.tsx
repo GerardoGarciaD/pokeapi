@@ -19,16 +19,26 @@ export const StatsDisplay: FC<Props> = ({ pokemon }) => {
   return (
     <div className={styles['stats-display']}>
       <div className={styles['pokemon-header']}>
-        <Typography variant="h3" className={styles.capitalize}>
+        <Typography
+          sx={{ typography: { xs: 'body1', md: 'h3' } }}
+          className={styles.capitalize}
+        >
           {name}
         </Typography>
-        <Typography variant="h3" className={styles.capitalize}>
+        <Typography
+          sx={{ typography: { xs: 'body1', md: 'h3' } }}
+          className={styles.capitalize}
+        >
           # {id}
         </Typography>
       </div>
       <Divider></Divider>
 
-      <Typography mt={2} variant="h4" className={styles.capitalize}>
+      <Typography
+        mt={2}
+        sx={{ typography: { xs: 'body2', md: 'h4' } }}
+        className={styles.capitalize}
+      >
         Type
       </Typography>
 
@@ -38,12 +48,18 @@ export const StatsDisplay: FC<Props> = ({ pokemon }) => {
             className={styles.capitalize}
             key={pokemonType.pokemon_v2_type.name}
           >
-            {pokemonType.pokemon_v2_type.name}
+            <Typography sx={{ typography: { xs: 'body2', md: 'h5' } }}>
+              {pokemonType.pokemon_v2_type.name}
+            </Typography>
           </li>
         ))}
       </ul>
 
-      <Typography mt={2} variant="h4" className={styles.capitalize}>
+      <Typography
+        mt={2}
+        sx={{ typography: { xs: 'body2', md: 'h4' } }}
+        className={styles.capitalize}
+      >
         Abilities
       </Typography>
       <ul>
@@ -52,12 +68,18 @@ export const StatsDisplay: FC<Props> = ({ pokemon }) => {
             className={styles.capitalize}
             key={pokemonAbility.pokemon_v2_ability.name}
           >
-            {pokemonAbility.pokemon_v2_ability.name}
+            <Typography sx={{ typography: { xs: 'body2', md: 'h5' } }}>
+              {pokemonAbility.pokemon_v2_ability.name}
+            </Typography>
           </li>
         ))}
       </ul>
 
-      <Typography mt={2} variant="h4" className={styles.capitalize}>
+      <Typography
+        mt={2}
+        sx={{ typography: { xs: 'body2', md: 'h4' } }}
+        className={styles.capitalize}
+      >
         Moves
       </Typography>
       <ul>
@@ -66,12 +88,18 @@ export const StatsDisplay: FC<Props> = ({ pokemon }) => {
             className={styles.capitalize}
             key={pokemonMove.pokemon_v2_move.name}
           >
-            {pokemonMove.pokemon_v2_move.name}
+            <Typography sx={{ typography: { xs: 'body2', md: 'h5' } }}>
+              {pokemonMove.pokemon_v2_move.name}
+            </Typography>
           </li>
         ))}
       </ul>
 
-      <Typography mt={2} variant="h4" className={styles.capitalize}>
+      <Typography
+        mt={2}
+        sx={{ typography: { xs: 'body2', md: 'h4' } }}
+        className={styles.capitalize}
+      >
         Stats
       </Typography>
       <ul>
@@ -80,7 +108,9 @@ export const StatsDisplay: FC<Props> = ({ pokemon }) => {
             className={styles.capitalize}
             key={pokemonStats.pokemon_v2_stat.name}
           >
-            {pokemonStats.pokemon_v2_stat.name}: {pokemonStats.base_stat}
+            <Typography sx={{ typography: { xs: 'body2', md: 'h5' } }}>
+              {pokemonStats.pokemon_v2_stat.name}: {pokemonStats.base_stat}
+            </Typography>
           </li>
         ))}
       </ul>
